@@ -161,14 +161,8 @@ class RulesCollection(object):
         text = ""
         matches = list()
 
-        try:
-            with codecs.open(playbookfile['path'], mode='rb', encoding='utf-8') as f:
-                text = f.read()
-        except IOError as e:
-            print("WARNING: Couldn't open %s - %s" %
-                  (playbookfile['path'], e.strerror),
-                  file=sys.stderr)
-            return matches
+        with codecs.open(playbookfile['path'], mode='rb', encoding='utf-8') as f:
+            text = f.read()
 
         for rule in self.rules:
             if not tags or not set(rule.tags).union([rule.id]).isdisjoint(tags):
